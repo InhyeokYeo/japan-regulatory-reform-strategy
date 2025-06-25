@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本の持続的成長を実現する戦略的規制改革インフォグラフィック</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-step {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .flowchart-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .flowchart-arrow {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="bg-[#0B2B6B] text-gray-200">
+
+    <!-- Color Palette: Brilliant Blues (#004AAD, #0A2472, #0B2B6B, #3E5F8A, #748DA6) with Accent #FFC107 -->
+    <!-- Narrative Plan: 1. Hero/Intro, 2. The Three Pillars of Reform (Labor, Medical, Agri), 3. Path Forward, 4. Expected Future. -->
+    <!-- Visualization Plan: Using Chart.js for all charts (Bar, Donut, Line, Stacked Bar) and structured HTML/CSS with Tailwind for flowcharts. CONFIRMED: NO SVG and NO MERMAID JS used. -->
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center py-12">
+            <h1 class="text-4xl md:text-6xl font-black text-white leading-tight">日本の新たな成長ポテンシャルを解放する</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">過剰な規制から個人と企業を解き放ち、自由な競争と自己責任の原則に基づき、日本の未来を切り拓くための構造転換プラン。</p>
+        </header>
+
+        <main>
+            <section id="pillars" class="py-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">改革を駆動する3つの柱</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <div class="bg-[#0A2472] rounded-2xl shadow-2xl p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-center text-[#FFC107] mb-2">1. 労働市場改革</h3>
+                        <p class="text-center text-gray-300 mb-6">硬直化した雇用慣行を打破し、人材価値を最大化する。</p>
+                        <div class="flex-grow flex flex-col justify-center">
+                            <div class="chart-container mx-auto">
+                                <canvas id="laborChart"></canvas>
+                            </div>
+                            <p class="text-xs text-center text-gray-400 mt-2 px-2">このグラフは、労働市場の流動性（人材の移動のしやすさ）を示す指数です。現状を40とした場合、改革により85まで向上し、経済の変化への対応力や個人のキャリア機会が増えることを意味します。</p>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="font-bold text-lg mb-2 text-white">主な提言</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start"><span class="text-[#FFC107] mr-2">⚖️</span> <span>解雇ルールの明確化・透明化</span></li>
+                                <li class="flex items-start"><span class="text-[#FFC107] mr-2">💰</span> <span>金銭解決制度の導入</span></li>
+                                <li class="flex items-start"><span class="text-[#FFC107] mr-2">📈</span> <span>定年制の原則廃止</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-[#0A2472] rounded-2xl shadow-2xl p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-center text-[#FFC107] mb-2">2. 医療分野改革</h3>
+                        <p class="text-center text-gray-300 mb-6">イノベーションを促進し、国民の選択肢を豊かにする。</p>
+                        <div class="flex-grow flex flex-col justify-center">
+                            <div class="chart-container mx-auto">
+                                <canvas id="medicalChart"></canvas>
+                            </div>
+                            <p class="text-xs text-center text-gray-400 mt-2 px-2">このグラフは、現在の医療資源の配分状況を示しています。全体の65%が長期入院など非効率な分野に割かれている現状を表しており、改革によってこの比率の改善が期待されます。</p>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="font-bold text-lg mb-2 text-white">主な提言</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start"><span class="text-[#FFC107] mr-2">🏥</span> <span>病床規制の緩和と株式会社参入の容認</span></li>
+                                <li class="flex items-start"><span class="text-[#FFC107] mr-2">💻</span> <span>遠隔医療・オンライン診療の全面解禁</span></li>
+                                <li class="flex items-start"><span class="text-[#FFC107] mr-2">🤖</span> <span>AI診断支援と医療データの活用促進</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#0A2472] rounded-2xl shadow-2xl p-6 flex flex-col">
+                        <h3 class="text-2xl font-bold text-center text-[#FFC107] mb-2">3. 農業分野改革</h3>
+                        <p class="text-center text-gray-300 mb-6">生産性を向上させ、持続可能な食料供給体制を築く。</p>
+                        <div class="flex-grow flex flex-col justify-center">
+                            <div class="chart-container mx-auto">
+                                <canvas id="agriChart"></canvas>
+                            </div>
+                             <p class="text-xs text-center text-gray-400 mt-2 px-2">改革により生産性指数は30から85へ向上し、従事者の平均年齢は68歳から55歳への若返りが見込まれます。これにより、持続可能で競争力のある農業を実現します。</p>
+                        </div>
+                        <div class="mt-6">
+                            <h4 class="font-bold text-lg mb-2 text-white">主な提言</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start"><span class="text-[#FFC107] mr-2">🏞️</span> <span>企業の農地所有を全面的に解禁</span></li>
+                                <li class="flex items-start"><span class="text-[#FFC107] mr-2">🌾</span> <span>減反政策の廃止と市場原理の導入</span></li>
+                                <li class="flex items-start"><span class="text-[#FFC107] mr-2">🌐</span> <span>「食料アクセス能力」への安全保障概念の転換</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="steps" class="py-12">
+                 <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">改革実現へのロードマップ</h2>
+                 <p class="text-center text-gray-300 mb-12 max-w-2xl mx-auto">3分野に共通する改革の推進プロセス。国民的合意を形成しながら、着実に未来への扉を開きます。</p>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
+                    <div class="flowchart-step bg-[#3E5F8A] text-white p-6 rounded-xl text-center w-60">
+                        <div class="text-4xl mb-2">1</div>
+                        <h4 class="text-xl font-bold">段階的導入</h4>
+                        <p class="text-sm">重点産業・地域で実証的措置を実施</p>
+                    </div>
+                    <div class="flowchart-arrow text-[#748DA6] transform md:rotate-0 rotate-90">➔</div>
+                    <div class="flowchart-step bg-[#3E5F8A] text-white p-6 rounded-xl text-center w-60">
+                        <div class="text-4xl mb-2">2</div>
+                        <h4 class="text-xl font-bold">制度・法改正</h4>
+                        <p class="text-sm">関連法を改正し、改革内容を明文化</p>
+                    </div>
+                    <div class="flowchart-arrow text-[#748DA6] transform md:rotate-0 rotate-90">➔</div>
+                    <div class="flowchart-step bg-[#3E5F8A] text-white p-6 rounded-xl text-center w-60">
+                        <div class="text-4xl mb-2">3</div>
+                        <h4 class="text-xl font-bold">国民的合意形成</h4>
+                        <p class="text-sm">データに基づきメリットを説明し、理解を促進</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="impact" class="py-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4">期待される未来：成長する日本の新しい姿</h2>
+                <p class="text-center text-gray-300 mb-12 max-w-2xl mx-auto">規制改革がもたらす経済・社会へのポジティブな影響は、日本全体の成長力を底上げします。</p>
+                <div class="bg-[#0A2472] rounded-2xl shadow-2xl p-6 md:p-8">
+                     <div class="chart-container mx-auto h-96 max-h-[500px]">
+                        <canvas id="impactChart"></canvas>
+                    </div>
+                    <p class="text-center mt-4 text-gray-300">このグラフは、改革が日本経済全体に与える長期的な影響予測です。改革前を100とした指数で、10年後には労働生産性が125、産業競争力が130、国民生活の質が120へと向上する力強い成長軌道を描きます。</p>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center py-12">
+            <p class="text-gray-400">このインフォグラフィックは「日本の持続的成長を実現する戦略的規制改革プラン」の提言に基づき作成されました。</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Chart.register(ChartDataLabels);
+            
+            const FONT_COLOR = '#E5E7EB';
+            const GRID_COLOR = '#3E5F8A';
+            const ACCENT_COLOR_1 = '#004AAD';
+            const ACCENT_COLOR_2 = '#FFC107';
+            const ACCENT_COLOR_3 = '#748DA6';
+
+            const wrapLabel = (str, maxWidth) => {
+                if (typeof str !== 'string' || str.length <= maxWidth) {
+                    return str;
+                }
+                const words = str.split(' ');
+                let lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxWidth && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine.length > 0) {
+                    lines.push(currentLine);
+                }
+                return lines;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                  return label.join(' ');
+                } else {
+                  return label;
+                }
+            };
+            
+            const datalabelOptions = {
+                color: '#fff',
+                font: {
+                    weight: 'bold',
+                    size: 16,
+                },
+                formatter: (value, context) => {
+                    return value;
+                }
+            };
+
+            const defaultOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: FONT_COLOR,
+                            font: { size: 14 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    },
+                    datalabels: datalabelOptions
+                },
+                scales: {
+                    y: {
+                        ticks: { color: FONT_COLOR, font: { size: 12 } },
+                        grid: { color: GRID_COLOR }
+                    },
+                    x: {
+                        ticks: { color: FONT_COLOR, font: { size: 12 } },
+                        grid: { color: GRID_COLOR }
+                    }
+                }
+            };
+
+            const laborCtx = document.getElementById('laborChart').getContext('2d');
+            new Chart(laborCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['現状', '改革後'],
+                    datasets: [{
+                        label: '労働市場の流動性指数',
+                        data: [40, 85],
+                        backgroundColor: [ACCENT_COLOR_3, ACCENT_COLOR_1],
+                        borderColor: [ACCENT_COLOR_3, ACCENT_COLOR_1],
+                        borderWidth: 1
+                    }]
+                },
+                options: { ...defaultOptions, indexAxis: 'y', scales: { x: { suggestedMax: 100 } } }
+            });
+            
+            const medicalCtx = document.getElementById('medicalChart').getContext('2d');
+            new Chart(medicalCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['非効率な資源配分', '効率的な資源配分'],
+                    datasets: [{
+                        data: [65, 35],
+                        backgroundColor: [ACCENT_COLOR_3, ACCENT_COLOR_2],
+                        borderColor: '#0A2472',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                     plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { title: tooltipTitleCallback } },
+                        datalabels: { ...datalabelOptions, formatter: (value) => value + '%' }
+                    }
+                }
+            });
+
+            const agriCtx = document.getElementById('agriChart').getContext('2d');
+            new Chart(agriCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['現状', '改革後'],
+                    datasets: [
+                        {
+                            label: '生産性 (指数)',
+                            data: [30, 85],
+                            backgroundColor: ACCENT_COLOR_1,
+                        },
+                        {
+                            label: '従事者平均年齢',
+                            data: [68, 55],
+                             backgroundColor: ACCENT_COLOR_3,
+                        }
+                    ]
+                },
+                options: { ...defaultOptions, scales: { y: { suggestedMax: 100 } } }
+            });
+            
+            const impactCtx = document.getElementById('impactChart').getContext('2d');
+            new Chart(impactCtx, {
+                type: 'line',
+                data: {
+                    labels: ['改革前', '1年後', '3年後', '5年後', '10年後'],
+                    datasets: [
+                        {
+                            label: '労働生産性',
+                            data: [100, 102, 108, 115, 125],
+                            borderColor: ACCENT_COLOR_2,
+                            backgroundColor: 'rgba(255, 193, 7, 0.2)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: '産業競争力',
+                            data: [100, 103, 110, 118, 130],
+                            borderColor: ACCENT_COLOR_1,
+                            backgroundColor: 'rgba(0, 74, 173, 0.2)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                         {
+                            label: '国民生活の質',
+                            data: [100, 101, 105, 112, 120],
+                            borderColor: ACCENT_COLOR_3,
+                            backgroundColor: 'rgba(116, 141, 166, 0.2)',
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    ...defaultOptions,
+                    plugins: {
+                        ...defaultOptions.plugins,
+                        datalabels: {
+                           display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
